@@ -1,0 +1,74 @@
+//Creating Transfer Function
+clc;
+clear all;
+
+//Using numerator and denominator coefficients
+num = [1];
+den = poly([0 0.1 10],'s','c');
+P1 = syslin('c',num,den);
+disp(P1);
+
+num=poly([0 0.1 10],'s','c');
+den=poly([0 0.1 10],'s','c');
+P3=syslin('c',num,den);
+disp(P3);
+
+//Using the variable 's'
+s=poly(0,'s');
+sys=s/(s^2+2*s+1);
+P2=syslin('c',sys);
+disp(P2);
+
+// mechanical system
+clc;
+clear all;
+
+s=poly(0,'s');
+M=input(" Enter the mass value :");// enter 100
+B=input("Enter the Damping value :");// enter 50 
+K=input("Enter the value of spring :"); // enter 75
+
+T1=1/((M*s^2)+(B*s)+K);
+
+subplot(2,3,1);
+t=0:0.05:50;
+plot2d(t,csim('step',t,T1));
+subplot(2,3,2);
+plot2d(t,csim('impulse',t,T1));
+
+//electrical system
+clc;
+clear all;
+
+S=poly(0,'S');
+R=input("Enter the Resistance :");//1000
+C=input("Enter the capacitance :");//150*10^6
+
+T2=1/(1+3*R*C*S+(R^2)*(C^2)*S);
+
+subplot(2,3,3);
+t=0:0.05:5;
+plot2d(t,csim('step',t,T2));
+subplot(2,3,4);
+plot2d(t,csim('impulse',t,T2));
+
+
+//electromechanical system
+clc;
+clear all;
+
+S=poly(0,'S');
+R=input("Enter the armature resistance value :"); //enter 4.38
+L=input("Enter the armature inductance value :");//enter 2.15+10^13
+J=input("Enter the moment of inertia of motor and load :"); //enter 2.2*104
+B=input("Enter the frictional coefficient of motor and load :"); //enter 0.4
+kt=input("Enter the torque constant value :");//enter 1.94
+kb=input('Enter the back emf constant value :');//enter 1.43
+
+T3 = kt/(((R+s*L)*(J*s^2+B*s))+kb*kt*S);
+
+subplot(2,3,5);
+t=0:0.05:5;
+plot2d(t,csim('step',t,T3));
+subplot(2,3,6);
+plot2d(t,csim('impulse',t,T3));
