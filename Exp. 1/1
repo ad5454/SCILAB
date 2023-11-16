@@ -1,0 +1,74 @@
+clc;
+clear;
+L=input("Enter the Length:");
+A=input("Enter the Amplitude:");
+f=input("Enter the Frequency:");
+//Generation of IMPULSE SIGNAL
+t1=-L:L;
+x1=[zeros(1,L),A*ones(1,1),zeros(1,L)];
+subplot(2,4,1);
+plot2d3(t1,x1);
+title("Impulse Signal")
+xlabel("Time")
+ylabel("Amplitude")
+// Generation of STEP SIGNAL
+t2=0:0.01:L;
+x2=zeros(size(t2));
+x2(t2>=0)=1;
+subplot(2,4,2)
+plot2d(t2,x2);
+title("Step Signal")
+xlabel("Time")
+ylabel("Amplitude")
+// Generation of RAMP SIGNAL
+t3=0:L;
+x3=A*t3;
+subplot(2,4,3)
+plot2d(t3,x3);
+title("Ramp Signal")
+xlabel("Time")
+ylabel("Amplitude")
+// Generation of PARABOLIC SIGNAL
+t4=0:0.01:L;
+x4=A*(t4.^2);
+subplot(2,4,4)
+plot2d(t4,x4);
+title("Parabolic Signal")
+xlabel("Time")
+ylabel("Amplitude")
+// Generation of RISING EXPONENTIAL SIGNAL
+t5=0:0.01:L;
+x5=A*exp(t5);
+subplot(2,4,5)
+plot2d(t5,x5);
+title("Rising Exponential Signal")
+xlabel("Time")
+ylabel("Amplitude")
+// Generation of DECAYING EXPONENTIAL SIGNAL
+t6=0:0.01:L;
+x6=A*exp(-t6);
+subplot(2,4,6)
+plot2d(t6,x6);
+title("Decaying Exponential Signal")
+xlabel("Time")
+ylabel("Amplitude")
+// Generation of SINUSOIDAL SIGNAL
+t7=0:0.01:L;
+x7=A*sin(2*%pi*f*t7);
+subplot(2,4,7)
+plot2d(t7,x7);
+title("Sinusoidal Signal")
+xlabel("Time")
+ylabel("Amplitude")
+// Generation of COSINE SIGNAL
+t8=0:0.01:L;
+x8=A*cos(2*%pi*f*t8);
+subplot(2,4,8)
+plot2d(t8,x8);
+title("Cosine Signal")
+xlabel("Time")
+ylabel("Amplitude")
+
+
+
+
